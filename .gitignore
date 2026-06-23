@@ -1,0 +1,13 @@
+# Environment files
+.env
+.env.*
+
+# Uploaded images
+uploads/
+
+# Node modules
+node_modules/
+
+# Build files
+dist/
+build/
