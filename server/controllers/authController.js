@@ -70,7 +70,7 @@ const register = async (req, res) => {
       [name, email, roll_no, hashedPassword, verificationToken],
     );
 
-    const verifyLink = `http://localhost:5173/verify-email/${verificationToken}`;
+    const verifyLink = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
 
     await sendEmail(
       email,
@@ -246,7 +246,7 @@ const forgotPassword = async (req, res) => {
       [resetToken, expiry, user.id],
     );
 
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
     console.log("EMAIL_USER:", process.env.EMAIL_USER);
     console.log("EMAIL_PASS:", process.env.EMAIL_PASS);
