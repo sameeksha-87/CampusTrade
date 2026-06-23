@@ -72,11 +72,15 @@ const register = async (req, res) => {
 
     const verifyLink = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
 
+    console.log("STEP 3");
+
     await sendEmail(
       email,
       "Verify your CampusTrade account",
       `Click here to verify your account:\n${verifyLink}`,
     );
+
+    console.log("STEP 4");
 
     // 5. Return token
     const token = signToken(result.insertId);
@@ -84,6 +88,8 @@ const register = async (req, res) => {
       message:
         "Please check your email and verify your account.",
     });
+
+    console.log("STEP 5");
   } catch (err) {
     console.error("Register error:", err);
     res.status(500).json({ message: "Server error. Please try again." });
