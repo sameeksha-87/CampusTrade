@@ -17,9 +17,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/listings", listingRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 
-// placeholder — you'll add these in Phase 2
-// app.use("/api/listings", listingRoutes);
-// app.use("/api/wishlist", wishlistRoutes);
 
 //Global error handler
 app.use((err, req, res, next) => {
