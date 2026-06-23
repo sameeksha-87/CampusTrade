@@ -215,7 +215,7 @@ function EditListing() {
                     }}
                   >
                     <img
-                      src={`http://localhost:5000/uploads/${img.image_url}`}
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${img.image_url}`}
                       alt="Listing"
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />

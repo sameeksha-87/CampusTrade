@@ -73,7 +73,7 @@ function ListingCard({ listing }) {
       >
         {listing.primary_image ? (
           <img
-            src={`http://localhost:5000/uploads/${listing.primary_image}`}
+            src={`${import.meta.env.VITE_API_URL}/uploads/${listing.primary_image}`}
             alt={listing.title}
             style={{
               width: "100%",

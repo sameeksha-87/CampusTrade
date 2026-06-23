@@ -101,7 +101,7 @@ function ListingDetails() {
           >
             {activeImage ? (
               <img
-                src={`http://localhost:5000/uploads/${activeImage}`}
+                src={`${import.meta.env.VITE_API_URL}/uploads/${activeImage}`}
                 alt={listing.title}
                 style={{
                   width: "100%",
@@ -132,7 +132,7 @@ function ListingDetails() {
                   }}
                 >
                   <img
-                    src={`http://localhost:5000/uploads/${img.image_url}`}
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${img.image_url}`}
                     alt="Thumbnail"
                     style={{
                       width: "100%",

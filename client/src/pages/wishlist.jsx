@@ -103,7 +103,7 @@ function Wishlist() {
               >
                 {item.primary_image ? (
                   <img
-                    src={`http://localhost:5000/uploads/${item.primary_image}`}
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${item.primary_image}`}
                     alt={item.title}
                     style={{
                       width: "100%",
