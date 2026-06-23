@@ -3,7 +3,6 @@
 .env.*
 
 # Uploaded images
-uploads/
 
 # Node modules
 node_modules/
