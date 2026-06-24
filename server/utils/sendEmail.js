@@ -6,23 +6,34 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
+});
+
+transporter.verify(function (error, success) {
+  if (error) {
+    console.error("SMTP ERROR:", error);
+  } else {
+    console.log("SMTP READY");
+  }
 });
 
 const sendEmail = async (to, subject, text) => {
-  try {
-    const info = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to,
-      subject,
-      text,
-    });
+  console.log("EMAIL_USER:", process.env.EMAIL_USER);
 
-    console.log("EMAIL SENT:", info.messageId);
-  } catch (err) {
-    console.error("EMAIL ERROR:");
-    console.error(err);
-    throw err;
-  }
+  console.log("BEFORE SENDMAIL");
+
+  const info = await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to,
+    subject,
+    text,
+  });
+
+  console.log("AFTER SENDMAIL");
+
+  return info;
 };
 
 module.exports = sendEmail;
