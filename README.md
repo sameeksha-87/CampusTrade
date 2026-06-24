@@ -33,11 +33,13 @@ Deployment
 * Backend: Railway
 * Database: Railway MySQL
 
-**Environment Variables**
+**## Environment Variables**
 
-Backend
-Create a .env file inside the server folder:
+### Backend
 
+Create a `.env` file inside the server folder:
+
+```env
 PORT=8080
 
 MYSQL_HOST=
@@ -49,13 +51,16 @@ MYSQL_DATABASE=
 JWT_SECRET=
 JWT_EXPIRES_IN=7d
 
-CLIENT_URL= http://localhost:5173
+CLIENT_URL=http://localhost:5173
+```
 
+### Frontend
 
-Frontend
-Create a .env file inside the client folder:
+Create a `.env` file inside the client folder:
 
-VITE_API_URL= http://localhost:8080/api
+```env
+VITE_API_URL=http://localhost:8080/api
+```
 
 
 **Future Improvements**
