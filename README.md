@@ -33,9 +33,9 @@ Deployment
 * Backend: Railway
 * Database: Railway MySQL
 
-**## Environment Variables**
+**Environment Variables**
 
-### Backend
+Backend
 
 Create a `.env` file inside the server folder:
 
@@ -54,7 +54,7 @@ JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:5173
 ```
 
-### Frontend
+Frontend
 
 Create a `.env` file inside the client folder:
 
