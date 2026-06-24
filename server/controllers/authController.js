@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
 const crypto = require("crypto");
-const sendEmail = require("../utils/sendEmail");
 
 // Helper — signs a JWT for a given user id
 const signToken = (id) =>
@@ -14,7 +13,6 @@ const signToken = (id) =>
 const register = async (req, res) => {
   try {
     const { name, email, roll_no, password } = req.body;
-    const verificationToken = crypto.randomBytes(32).toString("hex");
 
     // 1. Basic validation
     if (!name || !email || !roll_no || !password) {
@@ -63,29 +61,24 @@ const register = async (req, res) => {
     email,
     roll_no,
     password,
-    verification_token
+    is_verified
   )
-  VALUES (?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, TRUE)
   `,
-      [name, email, roll_no, hashedPassword, verificationToken],
+      [name, email, roll_no, hashedPassword],
     );
-
-    const verifyLink = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
-
-    console.log("STEP 3");
-
-    await sendEmail(
-      email,
-      "Verify your CampusTrade account",
-      `Click here to verify your account:\n${verifyLink}`,
-    );
-
-    console.log("STEP 4");
 
     // 5. Return token
     const token = signToken(result.insertId);
     res.status(201).json({
-      message: "Please check your email and verify your account.",
+      message: "Registration successful.",
+      token,
+      user: {
+        id: result.insertId,
+        name,
+        email,
+        roll_no,
+      },
     });
 
     console.log("STEP 5");
@@ -97,50 +90,6 @@ const register = async (req, res) => {
 
     res.status(500).json({
       message: err.message,
-    });
-  }
-};
-
-const verifyEmail = async (req, res) => {
-  try {
-    const { token } = req.params;
-
-    const [rows] = await pool.query(
-      `
-      SELECT *
-      FROM users
-      WHERE verification_token = ?
-      `,
-      [token],
-    );
-
-    if (rows.length === 0) {
-      return res.status(400).json({
-        message: "Invalid token",
-      });
-    }
-
-    const user = rows[0];
-
-    await pool.query(
-      `
-      UPDATE users
-      SET
-        is_verified = TRUE,
-        verification_token = NULL
-      WHERE id = ?
-      `,
-      [user.id],
-    );
-
-    res.json({
-      message: "Email verified successfully",
-    });
-  } catch (err) {
-    console.error(err);
-
-    res.status(500).json({
-      message: "Server error",
     });
   }
 };
@@ -174,12 +123,6 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         message: "Invalid email or password.",
-      });
-    }
-
-    if (!user.is_verified) {
-      return res.status(401).json({
-        message: "Please verify your email before logging in.",
       });
     }
 
@@ -360,5 +303,4 @@ module.exports = {
   forgotPassword,
   resetPassword,
   deleteAccount,
-  verifyEmail,
-};
+ };
