@@ -171,17 +171,6 @@ function Login() {
               marginTop: "-8px",
             }}
           >
-            <Link
-              to="/forgot-password"
-              style={{
-                color: "var(--primary)",
-                fontSize: "0.85rem",
-                textDecoration: "none",
-                fontWeight: 500,
-              }}
-            >
-              Forgot Password?
-            </Link>
           </div>
 
           <button
