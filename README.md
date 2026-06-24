@@ -3,8 +3,11 @@
 **Features**
 
 Authentication : User registration and login, JWT-based authentication, secure password hashing using bcrypt, protected routes for authenticated users.
+
 Marketplace : Create, edit, and delete listings, browse all available products, search listings by keyword and filter products by category and price range.
+
 Wishlist : Add and remove products from a wishlist, view saved items for future purchases.
+
 Image Uploads : Support for multiple product images, product image previews for listings.
 
 **Tech Stack**
