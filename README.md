@@ -65,7 +65,5 @@ VITE_API_URL=http://localhost:8080/api
 
 **Future Improvements**
 * Real-time chat between buyers and sellers
-* Product reporting and moderation system
 * Product reviews and ratings
-* AI-powered recommendations
-* Campus-specific marketplace communities
+
