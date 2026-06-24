@@ -85,14 +85,19 @@ const register = async (req, res) => {
     // 5. Return token
     const token = signToken(result.insertId);
     res.status(201).json({
-      message:
-        "Please check your email and verify your account.",
+      message: "Please check your email and verify your account.",
     });
 
     console.log("STEP 5");
   } catch (err) {
-    console.error("Register error:", err);
-    res.status(500).json({ message: "Server error. Please try again." });
+    console.error("========== REGISTER ERROR ==========");
+    console.error(err);
+    console.error(err.message);
+    console.error(err.stack);
+
+    res.status(500).json({
+      message: err.message,
+    });
   }
 };
 
