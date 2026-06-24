@@ -1,43 +1,16 @@
-const dns = require("dns");
+const { Resend } = require("resend");
 
-dns.setDefaultResultOrder("ipv4first");
-
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-});
-
-transporter.verify((err, success) => {
-  if (err) {
-    console.error("VERIFY ERROR:", err);
-  } else {
-    console.log("SMTP READY");
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async (to, subject, text) => {
-  console.log("EMAIL_USER:", process.env.EMAIL_USER);
-
-  console.log("BEFORE SENDMAIL");
-
-  const info = await transporter.sendMail({
-    from: process.env.EMAIL_USER,
+  const response = await resend.emails.send({
+    from: "onboarding@resend.dev",
     to,
     subject,
     text,
   });
 
-  console.log("AFTER SENDMAIL");
-
-  return info;
+  console.log("EMAIL SENT:", response);
 };
 
 module.exports = sendEmail;
